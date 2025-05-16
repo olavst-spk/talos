@@ -49,6 +49,7 @@ ARG PKG_OPENSSL=scratch
 ARG PKG_PCRE2=scratch
 ARG PKG_PIGZ=scratch
 ARG PKG_QEMU_TOOLS=scratch
+ARG PKG_VBOX_TOOLS=scratch
 ARG PKG_RUNC=scratch
 ARG PKG_SD_BOOT=scratch
 ARG PKG_SQUASHFS_TOOLS=scratch
@@ -191,6 +192,7 @@ FROM ${PKG_OPENSSL} AS pkg-openssl
 FROM ${PKG_PCRE2} AS pkg-pcre2
 FROM ${PKG_PIGZ} AS pkg-pigz
 FROM ${PKG_QEMU_TOOLS} AS pkg-qemu-tools
+FROM ${PKG_VBOX_TOOLS} AS pkg-vbox-tools
 FROM ${PKG_SQUASHFS_TOOLS} AS pkg-squashfs-tools
 FROM ${PKG_TAR} AS pkg-tar
 FROM ${PKG_XFSPROGS} AS pkg-xfsprogs
@@ -1015,6 +1017,7 @@ COPY --link --exclude=**/*.a --exclude=**/*.la  --exclude=usr/include --exclude=
 COPY --link --exclude=**/*.a --exclude=**/*.la  --exclude=usr/include --exclude=usr/lib/pkgconfig --from=pkg-pcre2 / /
 COPY --link --from=pkg-pigz / /
 COPY --link --from=pkg-qemu-tools / /
+COPY --link --from=pkg-vbox-tools / /
 COPY --link --from=pkg-squashfs-tools / /
 COPY --link --from=pkg-tar / /
 COPY --link --exclude=**/*.a --exclude=*.a --from=pkg-util-linux /usr/lib/libblkid.* /usr/lib/

@@ -17,7 +17,7 @@ import (
 
 	"github.com/siderolabs/go-cmd/pkg/cmd"
 
-	"github.com/siderolabs/talos/pkg/imager/qemuimg"
+	"github.com/siderolabs/talos/pkg/imager/vboxmanage"
 	"github.com/siderolabs/talos/pkg/imager/utils"
 )
 
@@ -152,7 +152,7 @@ func CreateOVAFromRAW(outPath, arch, scratchPath string, diskSize int64, printf 
 		return err
 	}
 
-	if err := qemuimg.Convert("raw", "vmdk", "compat6,subformat=streamOptimized,adapter_type=lsilogic", vmdkPath, printf); err != nil {
+	if err := vboxmanage.ConvertFromRaw("VMDK", "--variant=Stream", vmdkPath, printf); err != nil {
 		return err
 	}
 
